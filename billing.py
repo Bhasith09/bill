@@ -22,7 +22,7 @@ class billingClass:
     def __init__(self, root):
         self.root = root 
         self.root.state('zoomed')
-        self.root.geometry("1350x700+0+0")
+       # self.root.geometry("1350x700+0+0")
         self.root.title("ALI SALEH AL-JERYAN - Billing System By Bhasith")
         self.root.config(bg="white")
         self.root.focus_force()
@@ -119,7 +119,7 @@ class billingClass:
         service_frame = LabelFrame(MainFrame, text="Services",
                                 font=("times new roman", 15, "bold"), bg="white")
         service_frame.place(relx=0.01, rely=0.22, relwidth=0.54, relheight=0.50)
-        service_frame.grid_propagate(False)
+        service_frame.grid_propagate(False) #this fixes the resizing of the frame when widgets are added/removed, allowing us to use relative placement for the tree and custom input frames inside it without them resizing the main service frame
 
         # ====== FRAME INSIDE (for tree + scrollbars) ======
         tree_frame = Frame(service_frame, bg="white")
@@ -503,12 +503,7 @@ class billingClass:
 
     
     def generate_invoice(self):
-        check_query = "SELECT invoice_no FROM bills WHERE invoice_no=?"
-        result = self.execute_query(
-            check_query,
-            (self.var_invoice.get(),),
-            fetch=True
-            )   
+
         """Generate a unique invoice number"""
         try:
             # Get the last invoice number from database
