@@ -21,6 +21,7 @@ def resource_path(relative_path):
 class billingClass:
     def __init__(self, root):
         self.root = root 
+        self.root.state('zoomed')
         self.root.geometry("1350x700+0+0")
         self.root.title("ALI SALEH AL-JERYAN - Billing System By Bhasith")
         self.root.config(bg="white")
@@ -62,67 +63,67 @@ class billingClass:
         # Customer Frame
         customer_frame = LabelFrame(MainFrame, text="Customer Details", 
                                   font=("times new roman", 15, "bold"), bg="white")
-        customer_frame.place(relx=0.01, rely=0.01, relwidth=0.25, relheight=0.22)
+        customer_frame.place(relx=0.01, rely=0.01, relwidth=0.25, relheight=0.20)
         
         # Labels and Entries
         lbl_invoice = Label(customer_frame, text="Invoice No.", font=("times new roman", 15), bg="white")
         lbl_invoice.grid(row=0, column=0, sticky="w", padx=5, pady=2)
         txt_invoice = Entry(customer_frame, textvariable=self.var_invoice, font=("times new roman", 15), 
-                          bg="lightyellow", state='readonly')
-        txt_invoice.grid(row=0, column=1, sticky="w", padx=5, pady=2)
+                          bg="lightyellow", state='readonly',width=25)
+        txt_invoice.grid(row=0, column=1, sticky="w", padx=5, pady=3)
         
         lbl_name = Label(customer_frame, text="Name", font=("times new roman", 15), bg="white")
-        lbl_name.grid(row=1, column=0, sticky="w", padx=5, pady=2)
+        lbl_name.grid(row=1, column=0, sticky="w", padx=5, pady=3)
         txt_name = Entry(customer_frame, textvariable=self.var_customer_name, font=("times new roman", 15), 
-                        bg="lightyellow")
-        txt_name.grid(row=1, column=1, sticky="w", padx=5, pady=2)
+                        bg="lightyellow",width=25)
+        txt_name.grid(row=1, column=1, sticky="w", padx=5, pady=3)
         
         lbl_contact = Label(customer_frame, text="Contact", font=("times new roman", 15), bg="white")
-        lbl_contact.grid(row=2, column=0, sticky="w", padx=5, pady=2)
+        lbl_contact.grid(row=2, column=0, sticky="w", padx=5, pady=3)
         txt_contact = Entry(customer_frame, textvariable=self.var_contact, font=("times new roman", 15), 
-                           bg="lightyellow")
-        txt_contact.grid(row=2, column=1, sticky="w", padx=5, pady=2)
+                           bg="lightyellow",width=25)
+        txt_contact.grid(row=2, column=1, sticky="w", padx=5, pady=3)
        
         lbl_bill_type = Label(customer_frame, text="Bill Type", font=("times new roman", 15), bg="white")
-        lbl_bill_type.grid(row=3, column=0, sticky="w", padx=5, pady=2)
+        lbl_bill_type.grid(row=3, column=0, sticky="w", padx=5, pady=3)
 
         cmb_bill_type = ttk.Combobox(customer_frame, textvariable=self.var_bill_type, 
                                     values=("invoice", "quotation"), state="readonly", font=("times new roman", 15))
-        cmb_bill_type.grid(row=3, column=1, sticky="w", padx=5, pady=2)
+        cmb_bill_type.grid(row=3, column=1, sticky="w", padx=5, pady=3)
         cmb_bill_type.current(0)
  
         # Vehicle Frame
         vehicle_frame = LabelFrame(MainFrame, text="Vehicle Details", 
                                  font=("times new roman", 15, "bold"), bg="white")
-        vehicle_frame.place(relx=0.30, rely=0.01, relwidth=0.25, relheight=0.22)
+        vehicle_frame.place(relx=0.30, rely=0.01, relwidth=0.25, relheight=0.20)
         
         lbl_vehicle_no = Label(vehicle_frame, text="Vehicle No.", font=("times new roman", 15), bg="white")
-        lbl_vehicle_no.grid(row=0, column=0, sticky="w", padx=5, pady=2)
+        lbl_vehicle_no.grid(row=0, column=0, sticky="w", padx=5, pady=3)
         txt_vehicle_no = Entry(vehicle_frame, textvariable=self.var_vehicle_no, font=("times new roman", 15), 
-                             bg="lightyellow")
-        txt_vehicle_no.grid(row=0, column=1, sticky="w", padx=5, pady=2)
+                             bg="lightyellow",width=25)
+        txt_vehicle_no.grid(row=0, column=1, sticky="w", padx=5, pady=3)
         
         lbl_vehicle_model = Label(vehicle_frame, text="Model", font=("times new roman", 15), bg="white")
-        lbl_vehicle_model.grid(row=1, column=0, sticky="w", padx=5, pady=2)
+        lbl_vehicle_model.grid(row=1, column=0, sticky="w", padx=5, pady=3)
         txt_vehicle_model = Entry(vehicle_frame, textvariable=self.var_vehicle_model, font=("times new roman", 15), 
-                                bg="lightyellow")
-        txt_vehicle_model.grid(row=1, column=1, sticky="w", padx=5, pady=2)
+                                bg="lightyellow",width=25)
+        txt_vehicle_model.grid(row=1, column=1, sticky="w", padx=5, pady=3)
         
         lbl_service_date = Label(vehicle_frame, text="Service Date", font=("times new roman", 15), bg="white")
-        lbl_service_date.grid(row=2, column=0, sticky="w", padx=5, pady=2)
+        lbl_service_date.grid(row=2, column=0, sticky="w", padx=5, pady=3)
         txt_service_date = Entry(vehicle_frame, textvariable=self.var_service_date, font=("times new roman", 15), 
-                               bg="lightyellow")
-        txt_service_date.grid(row=2, column=1, sticky="w", padx=5, pady=2)
+                               bg="lightyellow",width=25)
+        txt_service_date.grid(row=2, column=1, sticky="w", padx=5, pady=3)
         
         # ================= SERVICE FRAME =================
         service_frame = LabelFrame(MainFrame, text="Services",
                                 font=("times new roman", 15, "bold"), bg="white")
-        service_frame.place(relx=0.01, rely=0.25, relwidth=0.54, relheight=0.47)
+        service_frame.place(relx=0.01, rely=0.22, relwidth=0.54, relheight=0.50)
         service_frame.grid_propagate(False)
 
         # ====== FRAME INSIDE (for tree + scrollbars) ======
         tree_frame = Frame(service_frame, bg="white")
-        tree_frame.place(relx=0, rely=0, relwidth=1, relheight=0.70)
+        tree_frame.place(relx=0, rely=0, relwidth=1, relheight=0.75)
 
         # ====== SCROLLBARS ======
         scroll_y = Scrollbar(tree_frame, orient=VERTICAL)
@@ -165,7 +166,7 @@ class billingClass:
 # ================= CUSTOM SERVICE INPUTS (FIXED SINGLE LINE) =================
 
         custom_frame = Frame(service_frame, bg="white")
-        custom_frame.place(relx=0, rely=0.72, relwidth=1, relheight=0.28)
+        custom_frame.place(relx=0, rely=0.80, relwidth=1, relheight=0.25)
 
         custom_frame.grid_columnconfigure((0,1,2,3,4,5), weight=0)
 
@@ -174,30 +175,30 @@ class billingClass:
             font=("times new roman", 13), bg="white").grid(row=0, column=0, padx=5, pady=5, sticky="w")
 
         self.entry_custom_service = Entry(custom_frame,
-                                        font=("times new roman", 12),
+                                        font=("times new roman", 13),
                                         bg="lightyellow",
                                         width=20)
-        self.entry_custom_service.grid(row=0, column=1, padx=5, pady=5)
+        self.entry_custom_service.grid(row=0, column=1, padx=(0,5), pady=5)
 
         # Price
         Label(custom_frame, text="Price",
-            font=("times new roman", 12), bg="white").grid(row=0, column=2, padx=5, pady=5, sticky="w")
+            font=("times new roman", 13), bg="white").grid(row=0, column=2, padx=5, pady=5, sticky="w")
 
         self.entry_custom_price = Entry(custom_frame,
-                                        font=("times new roman", 12),
+                                        font=("times new roman", 13),
                                         bg="lightyellow",
                                         width=10)
-        self.entry_custom_price.grid(row=0, column=3, padx=5, pady=5)
+        self.entry_custom_price.grid(row=0, column=3, padx=(0,5), pady=5)
 
         # Qty
         Label(custom_frame, text="Qty",
-            font=("times new roman", 12), bg="white").grid(row=0, column=4, padx=5, pady=5, sticky="w")
+            font=("times new roman", 13), bg="white").grid(row=0, column=4, padx=5, pady=5, sticky="w")
 
         self.entry_custom_qty = Entry(custom_frame,
-                                    font=("times new roman", 12),
+                                    font=("times new roman", 13),
                                     bg="lightyellow",
-                                    width=5)
-        self.entry_custom_qty.grid(row=0, column=5, padx=5, pady=5)
+                                    width=6)
+        self.entry_custom_qty.grid(row=0, column=5, padx=(0,5), pady=5)
 
         # Save to DB (same line after Qty)
         self.save_to_db = IntVar()
@@ -207,22 +208,22 @@ class billingClass:
                     variable=self.save_to_db,
                     bg="white",
                     font=("times new roman", 12)
-                    ).grid(row=0, column=6, padx=10, pady=5, sticky="w")
+                    ).grid(row=0, column=6, padx=(2,2), pady=5, sticky="w")
 
         # Buttons (still same line)
         Button(custom_frame, text="Add Custom", command=self.add_custom_service,
-            font=("times new roman", 12), bg="purple", fg="white", width=12,height=1).grid(row=0, column=7, padx=5)
+            font=("times new roman", 12), bg="purple", fg="white", width=11,height=1).grid(row=0, column=7, padx=(0,1), sticky="w")
 
         Button(custom_frame, text="Update", command=self.update_service,
-            font=("times new roman", 12), bg="blue", fg="white", width=12,height=1).grid(row=0, column=8, padx=5)
+            font=("times new roman", 12), bg="blue", fg="white", width=12,height=1).grid(row=0, column=8, padx=1)
 
         Button(custom_frame, text="Delete", command=self.delete_service,
-            font=("times new roman", 12), bg="red", fg="white", width=12,height=1).grid(row=0, column=9, padx=5)
+            font=("times new roman", 12), bg="red", fg="white", width=12,height=1).grid(row=0, column=9, padx=1)
 
         
         # Billing Frame
         billing_frame = Frame(MainFrame, bd=2, relief=RIDGE, bg="white")
-        billing_frame.place(relx=0.71, rely=0.01, relwidth=0.28, relheight=0.67)
+        billing_frame.place(relx=0.56, rely=0.001, relwidth=0.44, relheight=0.67)
 
         lbl_title = Label(billing_frame, text="Billing Details", font=("times new roman", 20, "bold"), bg="orange")
         lbl_title.pack(side=TOP, fill=X)
@@ -257,55 +258,55 @@ class billingClass:
         
         # Buttons
         btn_frame = Frame(billing_frame, bd=2, relief=RIDGE, bg="white")
-        btn_frame.place(relx=0.01, rely=0.84, relwidth=0.98, relheight=0.15)
+        btn_frame.place(relx=0.01, rely=0.84, relwidth=0.96, relheight=0.15)
         
-        btn_add = Button(btn_frame, text="Add", command=self.add_to_cart, font=("times new roman", 15), 
+        btn_add = Button(btn_frame, text="Add", command=self.add_to_cart, font=("times new roman", 18), 
                         bg="green", fg="white", cursor="hand2")
-        btn_add.grid(row=0, column=0, padx=5, pady=5, sticky="w")
+        btn_add.grid(row=0, column=2, padx=(270,5), pady=5, sticky="w")
         
-        btn_remove = Button(btn_frame, text="Remove", command=self.remove_from_cart, font=("times new roman", 15), 
+        btn_remove = Button(btn_frame, text="Remove", command=self.remove_from_cart, font=("times new roman", 18), 
                            bg="red", fg="white", cursor="hand2")
-        btn_remove.grid(row=0, column=1, padx=5, pady=5, sticky="w")
+        btn_remove.grid(row=0, column=3, padx=5, pady=5, sticky="w")
         
-        btn_clear = Button(btn_frame, text="Clear", command=self.clear_cart, font=("times new roman", 15), 
+        btn_clear = Button(btn_frame, text="Clear", command=self.clear_cart, font=("times new roman", 18), 
                           bg="gray", fg="white", cursor="hand2")
-        btn_clear.grid(row=0, column=2, padx=5, pady=5, sticky="w")
+        btn_clear.grid(row=0, column=4, padx=5, pady=5, sticky="w")
         
         btn_generate = Button(btn_frame, text="Generate Bill", command=self.generate_bill, 
-                             font=("times new roman", 15), bg="blue", fg="white", cursor="hand2")
-        btn_generate.grid(row=0, column=3, padx=5, pady=5, sticky="w")
+                             font=("times new roman", 18), bg="blue", fg="white", cursor="hand2")
+        btn_generate.grid(row=0, column=5, padx=5, pady=5)
         
         # Quantity adjustment buttons
         btn_increase = Button(btn_frame, text="+", command=self.increase_quantity, font=("times new roman", 15), 
-                             bg="lightgreen", fg="black", cursor="hand2")
-        btn_increase.grid(row=1, column=0, padx=5, pady=5, sticky="w")
+                             bg="lightgreen", fg="black", cursor="hand2",width=3)
+        btn_increase.grid(row=0, column=0, padx=5, pady=5, sticky="w")
         
         btn_decrease = Button(btn_frame, text="-", command=self.decrease_quantity, font=("times new roman", 15), 
-                             bg="lightcoral", fg="black", cursor="hand2")
-        btn_decrease.grid(row=1, column=1, padx=5, pady=5, sticky="w")
+                             bg="lightcoral", fg="black", cursor="hand2",width=3)
+        btn_decrease.grid(row=0, column=1, padx=5, pady=5, sticky="w")
         
         # Total Frame
         total_frame = Frame(MainFrame, bd=2, relief=RIDGE, bg="white")
         
-        total_frame.place(relx=0.71, rely=0.70, relwidth=0.28, relheight=0.27)
+        total_frame.place(relx=0.56, rely=0.69, relwidth=0.43, relheight=0.30)
         
-        lbl_total = Label(total_frame, text="Bill Total", font=("times new roman", 20, "bold"), bg="lightgray")
+        lbl_total = Label(total_frame, text="Bill Total", font=("times new roman", 23, "bold"), bg="lightgray")
         lbl_total.pack(side=TOP, fill=X)
         
-        self.lbl_subtotal = Label(total_frame, text="Sub Total: 0.00", font=("times new roman", 15), bg="white")
-        self.lbl_subtotal.place(x=10, y=50)
+        self.lbl_subtotal = Label(total_frame, text="Sub Total: 0.00", font=("times new roman", 20), bg="white")
+        self.lbl_subtotal.place(x=10, y=100)
         
      #   self.lbl_tax = Label(total_frame, text="Tax (5%): 0.00", font=("times new roman", 15), bg="white")
       #  self.lbl_tax.place(x=10, y=80)
         
-        self.lbl_grandtotal = Label(total_frame, text="Grand Total: 0.00", font=("times new roman", 20, "bold"), 
+        self.lbl_grandtotal = Label(total_frame, text="Grand Total: 0.00", font=("times new roman", 25, "bold"), 
                                   bg="lightyellow")
-        self.lbl_grandtotal.place(x=10, y=120)
+        self.lbl_grandtotal.place(x=10, y=180)
         
         # Search Frame
         search_frame = LabelFrame(MainFrame, text="Search Bills", font=("times new roman", 15, "bold"), bg="white")
         
-        search_frame.place(relx=0.01, rely=0.74, relwidth=0.69, relheight=0.10)
+        search_frame.place(relx=0.01, rely=0.68, relwidth=0.54, relheight=0.10)
         
         cmb_search = ttk.Combobox(search_frame, textvariable=self.var_search_by, 
                                  values=("Select", "Invoice No.", "Customer Name", "Contact", "Vehicle No.", "Model"), 
@@ -328,7 +329,7 @@ class billingClass:
         # Bill History Frame
         history_frame = Frame(MainFrame, bd=3, relief=RIDGE, bg="white")
         
-        history_frame.place(relx=0.01, rely=0.85, relwidth=0.69, relheight=0.14)
+        history_frame.place(relx=0.01, rely=0.78, relwidth=0.54, relheight=0.22)
         
         scroll_y3 = Scrollbar(history_frame, orient=VERTICAL)
         scroll_x3 = Scrollbar(history_frame, orient=HORIZONTAL)
@@ -954,6 +955,7 @@ class billingClass:
                     vehicle_id = vehicle_result[0][0]
             else:
                 vehicle_id = None
+                
 
             # Save bill
             insert_bill = """INSERT INTO bills 
