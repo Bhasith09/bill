@@ -8,6 +8,8 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import os
 import sys
+import subprocess
+import platform
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and PyInstaller """
@@ -262,7 +264,7 @@ class billingClass:
         
         btn_add = Button(btn_frame, text="Add", command=self.add_to_cart, font=("times new roman", 18), 
                         bg="green", fg="white", cursor="hand2")
-        btn_add.grid(row=0, column=2, padx=(270,5), pady=5, sticky="w")
+        btn_add.grid(row=0, column=2, padx=(140,5), pady=5, sticky="w")
         
         btn_remove = Button(btn_frame, text="Remove", command=self.remove_from_cart, font=("times new roman", 18), 
                            bg="red", fg="white", cursor="hand2")
@@ -276,6 +278,16 @@ class billingClass:
                              font=("times new roman", 18), bg="blue", fg="white", cursor="hand2")
         btn_generate.grid(row=0, column=5, padx=5, pady=5)
         
+        btn_view_bills = Button(
+            btn_frame,
+            text="View Bills",
+            command=self.view_bills_window,
+            font=("times new roman", 18),
+            bg="purple",
+            fg="white",
+            cursor="hand2"
+        )
+        btn_view_bills.grid(row=0, column=6, padx=5, pady=5)
         # Quantity adjustment buttons
         btn_increase = Button(btn_frame, text="+", command=self.increase_quantity, font=("times new roman", 15), 
                              bg="lightgreen", fg="black", cursor="hand2",width=3)
@@ -636,8 +648,8 @@ class billingClass:
         self.lbl_subtotal.config(text=f"Sub Total: {subtotal:.2f}")
       #  self.lbl_tax.config(text=f"Tax (5%): {tax:.2f}")
         self.lbl_grandtotal.config(text=f"Grand Total: {grand_total:.2f}")
-        
-            
+
+
            
     def create_pdf_bill(self):
         """Create PDF invoice file"""
@@ -1082,6 +1094,8 @@ class billingClass:
 
             self.entry_custom_price.delete(0, END)
             self.entry_custom_price.insert(0, data[3])
+
+            
     def delete_service(self):
         selected = self.service_table.focus()
         if not selected:
@@ -1138,7 +1152,73 @@ class billingClass:
         except:
             messagebox.showerror("Error", "Invalid price", parent=self.root)
 
+    def view_bills_window(self):
+        win = Toplevel(self.root)
+        win.title("Generated Bills")
+        win.geometry("700x500")
+        win.config(bg="white")
 
+        Label(
+            win,
+            text="Generated Bills",
+            font=("times new roman", 20, "bold"),
+            bg="#010c48",
+            fg="white"
+        ).pack(fill=X)
+
+        frame = Frame(win, bg="white")
+        frame.pack(fill=BOTH, expand=True, padx=10, pady=10)
+
+        scroll = Scrollbar(frame)
+        scroll.pack(side=RIGHT, fill=Y)
+
+        self.bill_listbox = Listbox(
+            frame,
+            font=("times new roman", 14),
+            yscrollcommand=scroll.set
+        )
+        self.bill_listbox.pack(fill=BOTH, expand=True)
+
+        scroll.config(command=self.bill_listbox.yview)
+
+        # Load PDFs
+        if os.path.exists("bills"):
+            files = sorted(
+                [f for f in os.listdir("bills") if f.endswith(".pdf")],
+                reverse=True
+            )
+
+            for file in files:
+                self.bill_listbox.insert(END, file)
+
+        self.bill_listbox.bind("<Double-Button-1>", self.open_selected_bill)
+
+
+    def open_selected_bill(self, event=None):
+        selected = self.bill_listbox.curselection()
+
+        if not selected:
+            return
+
+        filename = self.bill_listbox.get(selected[0])
+        filepath = os.path.abspath(os.path.join("bills", filename))
+
+        try:
+            if platform.system() == "Windows":
+                os.startfile(filepath)
+
+            elif platform.system() == "Darwin":
+                subprocess.call(["open", filepath])
+
+            else:
+                subprocess.call(["xdg-open", filepath])
+
+        except Exception as e:
+            messagebox.showerror(
+                "Error",
+                f"Unable to open file\n{str(e)}",
+                parent=self.root
+            )
     
 #########################################datbase scherma############################################################
 
